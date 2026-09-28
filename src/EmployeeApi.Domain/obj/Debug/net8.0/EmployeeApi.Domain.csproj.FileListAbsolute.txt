@@ -1,0 +1,11 @@
+D:\cleanarchitecture\src\EmployeeApi.Domain\bin\Debug\net8.0\EmployeeApi.Domain.deps.json
+D:\cleanarchitecture\src\EmployeeApi.Domain\bin\Debug\net8.0\EmployeeApi.Domain.dll
+D:\cleanarchitecture\src\EmployeeApi.Domain\bin\Debug\net8.0\EmployeeApi.Domain.pdb
+D:\cleanarchitecture\src\EmployeeApi.Domain\obj\Debug\net8.0\EmployeeApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\cleanarchitecture\src\EmployeeApi.Domain\obj\Debug\net8.0\EmployeeApi.Domain.AssemblyInfoInputs.cache
+D:\cleanarchitecture\src\EmployeeApi.Domain\obj\Debug\net8.0\EmployeeApi.Domain.AssemblyInfo.cs
+D:\cleanarchitecture\src\EmployeeApi.Domain\obj\Debug\net8.0\EmployeeApi.Domain.csproj.CoreCompileInputs.cache
+D:\cleanarchitecture\src\EmployeeApi.Domain\obj\Debug\net8.0\EmployeeApi.Domain.dll
+D:\cleanarchitecture\src\EmployeeApi.Domain\obj\Debug\net8.0\refint\EmployeeApi.Domain.dll
+D:\cleanarchitecture\src\EmployeeApi.Domain\obj\Debug\net8.0\EmployeeApi.Domain.pdb
+D:\cleanarchitecture\src\EmployeeApi.Domain\obj\Debug\net8.0\ref\EmployeeApi.Domain.dll

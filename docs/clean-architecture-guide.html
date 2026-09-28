@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EmployeeApi | Clean Architecture Guide</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5d6b75;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --line: #d9dfdc;
+      --teal: #087f78;
+      --teal-light: #d9f1ed;
+      --coral: #d95d45;
+      --navy: #213547;
+      --shadow: 0 12px 30px rgba(23, 33, 43, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 16px/1.65 Georgia, "Times New Roman", serif;
+    }
+    a { color: var(--teal); }
+    code, pre { font-family: Consolas, "Courier New", monospace; }
+    code { color: var(--coral); }
+    .shell { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    header {
+      color: #fff;
+      background: var(--navy);
+      padding: 72px 0 64px;
+      border-bottom: 8px solid var(--coral);
+    }
+    .eyebrow {
+      color: #8ee0d5;
+      font: 700 13px/1.2 Consolas, monospace;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.15; }
+    h1 { max-width: 780px; margin: 16px 0; font-size: clamp(42px, 7vw, 78px); font-weight: 700; }
+    .lede { max-width: 720px; color: #dbe5e8; font-size: 21px; }
+    nav { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+    nav a {
+      color: #fff;
+      border: 1px solid #547080;
+      padding: 8px 13px;
+      text-decoration: none;
+      font: 14px Consolas, monospace;
+    }
+    main { padding: 48px 0 80px; }
+    section { margin: 0 0 56px; }
+    h2 { margin: 0 0 14px; font-size: 36px; }
+    h3 { margin: 0 0 8px; font-size: 23px; }
+    .intro { max-width: 780px; color: var(--muted); font-size: 19px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--teal);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 8px;
+      color: var(--teal);
+      background: var(--teal-light);
+      font: 700 12px Consolas, monospace;
+      text-transform: uppercase;
+    }
+    .diagram {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      align-items: stretch;
+      margin: 26px 0;
+    }
+    .layer {
+      position: relative;
+      min-height: 170px;
+      padding: 20px 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .layer::after {
+      content: "->";
+      position: absolute;
+      right: -18px;
+      top: 72px;
+      z-index: 1;
+      color: var(--coral);
+      font: 700 20px Consolas, monospace;
+    }
+    .layer:last-child::after { content: ""; }
+    .layer strong { display: block; color: var(--teal); font-size: 20px; }
+    .layer small { color: var(--muted); font: 13px/1.4 Consolas, monospace; }
+    .diagram-note { margin: 12px 0 20px; color: var(--muted); }
+    .architecture-diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .architecture-box {
+      padding: 18px 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .architecture-box h3 { margin-bottom: 5px; color: var(--teal); }
+    .architecture-box p { margin: 5px 0 0; }
+    .architecture-box.api { grid-column: 1 / -1; border-top: 5px solid var(--coral); }
+    .architecture-box.application { border-top: 5px solid var(--teal); }
+    .architecture-box.domain { border-top: 5px solid var(--navy); }
+    .architecture-box.infrastructure { grid-column: 1 / -1; border-top: 5px solid #b98523; }
+    .diagram-arrow {
+      display: block;
+      margin: 8px 0 0;
+      color: var(--coral);
+      font: 700 13px Consolas, monospace;
+    }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 15px 0; color: var(--muted); font-size: 14px; }
+    .legend strong { color: var(--ink); }
+    .rule {
+      padding: 18px 22px;
+      border-left: 5px solid var(--coral);
+      background: #fff4ef;
+    }
+    pre {
+      overflow-x: auto;
+      margin: 14px 0 0;
+      padding: 18px;
+      color: #e9f3f1;
+      background: #172b36;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .steps { counter-reset: step; padding: 0; list-style: none; }
+    .steps li { counter-increment: step; display: grid; grid-template-columns: 42px 1fr; gap: 15px; margin: 18px 0; }
+    .steps li::before {
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      color: #fff;
+      background: var(--coral);
+      border-radius: 50%;
+      font: 700 16px Consolas, monospace;
+    }
+    table { width: 100%; border-collapse: collapse; background: var(--panel); box-shadow: var(--shadow); }
+    th, td { padding: 14px 16px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: #fff; background: var(--navy); font-family: Consolas, monospace; font-size: 14px; }
+    footer { padding: 28px 0; color: var(--muted); border-top: 1px solid var(--line); }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 28px, 1120px); }
+      header { padding: 48px 0 42px; }
+      .grid, .diagram { grid-template-columns: 1fr; }
+      .architecture-diagram { grid-template-columns: 1fr; }
+      .architecture-box.api, .architecture-box.infrastructure { grid-column: auto; }
+      .layer { min-height: auto; }
+      .layer::after { content: "down"; right: auto; top: auto; bottom: -23px; left: calc(50% - 12px); }
+      .layer:last-child::after { content: ""; }
+      h2 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <div class="eyebrow">EmployeeApi / Architecture Notes</div>
+      <h1>Clean Architecture, explained through this API.</h1>
+      <p class="lede">A practical guide to the .NET 8 Employee CRUD API, showing where business rules live, how dependencies point inward, and how Dapper calls SQL Server stored procedures without leaking database details into the application core.</p>
+      <nav aria-label="Page sections">
+        <a href="#idea">The idea</a>
+        <a href="#layers">The layers</a>
+        <a href="#flow">Request flow</a>
+        <a href="#crud">CRUD mapping</a>
+        <a href="#run">Run it</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="idea">
+      <h2>1. The central idea</h2>
+      <p class="intro">Clean Architecture separates business decisions from delivery mechanisms. The core of the system should not need to know whether requests arrive through HTTP, data is stored in SQL Server, or Dapper is used for mapping.</p>
+      <div class="rule"><strong>The dependency rule:</strong> source-code dependencies point toward the domain. Outer layers may depend on inner layers; inner layers do not depend on outer layers.</div>
+      <p>In this project, the domain knows nothing about ASP.NET Core, Dapper, SQL Server, or stored procedures. The application layer defines what it needs through interfaces. Infrastructure supplies the database implementation. The API composes everything and exposes HTTP endpoints.</p>
+    </section>
+
+    <section id="layers">
+      <h2>2. The four layers</h2>
+      <p class="diagram-note"><strong>Read the diagram in two ways:</strong> solid relationships describe which project may reference another in source code. The request-flow relationship describes what happens when an HTTP request runs.</p>
+      <div class="architecture-diagram" aria-label="Clean Architecture dependency diagram">
+        <div class="architecture-box api">
+          <h3>1. API layer</h3>
+          <small>EmployeeApi.Api</small>
+          <p>Receives HTTP requests and calls the application service.</p>
+          <span class="diagram-arrow">source dependency: API -> Application</span>
+        </div>
+        <div class="architecture-box application">
+          <h3>2. Application layer</h3>
+          <small>EmployeeApi.Application</small>
+          <p>Owns use cases and defines <code>IEmployeeRepository</code>.</p>
+          <span class="diagram-arrow">source dependency: Application -> Domain</span>
+        </div>
+        <div class="architecture-box domain">
+          <h3>3. Domain layer</h3>
+          <small>EmployeeApi.Domain</small>
+          <p>Owns the <code>Employee</code> business model. It depends on nothing else.</p>
+        </div>
+        <div class="architecture-box infrastructure">
+          <h3>4. Infrastructure layer</h3>
+          <small>EmployeeApi.Infrastructure</small>
+          <p>Implements the application repository interface and talks to SQL Server through Dapper.</p>
+          <span class="diagram-arrow">source dependencies: Infrastructure -> Application and Domain</span>
+        </div>
+      </div>
+      <div class="legend"><span><strong>Source dependency:</strong> compile-time project reference</span><span><strong>Runtime call:</strong> the service invokes the injected repository implementation</span></div>
+      <div class="rule"><strong>Important:</strong> Application does not reference Infrastructure. It only knows the interface <code>IEmployeeRepository</code>. Dependency injection connects that interface to <code>EmployeeRepository</code> when the API starts.</div>
+      <div class="grid">
+        <article class="card"><span class="tag">Domain</span><h3>Business meaning</h3><p><code>Employee</code> represents an employee and its data. This layer is the most stable part of the system. It should contain entities, value objects, and domain rules.</p></article>
+        <article class="card"><span class="tag">Application</span><h3>Business use cases</h3><p><code>EmployeeService</code> coordinates operations such as create, read, update, and delete. <code>IEmployeeRepository</code> is an abstraction: the application asks for persistence without choosing a technology.</p></article>
+        <article class="card"><span class="tag">Infrastructure</span><h3>Technical details</h3><p><code>EmployeeRepository</code> implements the application interface. It uses Dapper's <code>CommandDefinition</code> with <code>CommandType.StoredProcedure</code> for every database operation.</p></article>
+        <article class="card"><span class="tag">API</span><h3>Delivery mechanism</h3><p><code>EmployeesController</code> translates HTTP requests into application calls and translates results into HTTP responses such as 200, 201, 204, and 404.</p></article>
+      </div>
+    </section>
+
+    <section id="flow">
+      <h2>3. What happens during a request?</h2>
+      <ol class="steps">
+        <li><div><strong>The client calls an endpoint.</strong><br><code>POST /api/employees</code> sends a JSON request body to <code>EmployeesController</code>.</div></li>
+        <li><div><strong>The API validates the input boundary.</strong><br>Data annotations on <code>CreateEmployeeRequest</code> check required fields, lengths, email format, and salary range.</div></li>
+        <li><div><strong>The application executes the use case.</strong><br><code>EmployeeService</code> maps the request to a domain <code>Employee</code> and calls <code>IEmployeeRepository</code>.</div></li>
+        <li><div><strong>Infrastructure performs persistence.</strong><br><code>EmployeeRepository</code> calls <code>dbo.Employee_Create</code> through Dapper and returns the new ID.</div></li>
+        <li><div><strong>The response travels outward.</strong><br>The controller loads the created employee and returns <code>201 Created</code> with a location for the new resource.</div></li>
+      </ol>
+      <pre><code>HTTP client
+    |
+    v
+EmployeesController -> EmployeeService -> IEmployeeRepository
+                                             ^
+                                             |
+                         EmployeeRepository (Dapper)
+                                             |
+                                             v
+                                  SQL stored procedure</code></pre>
+    </section>
+
+    <section id="crud">
+      <h2>4. CRUD and stored procedures</h2>
+      <table>
+        <thead><tr><th>HTTP operation</th><th>Application operation</th><th>Stored procedure</th><th>Success response</th></tr></thead>
+        <tbody>
+          <tr><td><code>GET /api/employees</code></td><td><code>GetAllAsync</code></td><td><code>dbo.Employee_GetAll</code></td><td>200 with a collection</td></tr>
+          <tr><td><code>GET /api/employees/{id}</code></td><td><code>GetByIdAsync</code></td><td><code>dbo.Employee_GetById</code></td><td>200, or 404</td></tr>
+          <tr><td><code>POST /api/employees</code></td><td><code>CreateAsync</code></td><td><code>dbo.Employee_Create</code></td><td>201 with created resource</td></tr>
+          <tr><td><code>PUT /api/employees/{id}</code></td><td><code>UpdateAsync</code></td><td><code>dbo.Employee_Update</code></td><td>204, or 404</td></tr>
+          <tr><td><code>DELETE /api/employees/{id}</code></td><td><code>DeleteAsync</code></td><td><code>dbo.Employee_Delete</code></td><td>204, or 404</td></tr>
+        </tbody>
+      </table>
+      <p>Stored procedures centralize SQL commands in the database. Dapper remains lightweight: it opens the connection, sends named parameters, and maps result rows to the domain model. The application layer does not reference Dapper.</p>
+      <pre><code>var command = new CommandDefinition(
+    "dbo.Employee_GetById",
+    new { Id = id },
+    commandType: CommandType.StoredProcedure,
+    cancellationToken: cancellationToken);
+
+return await connection.QuerySingleOrDefaultAsync&lt;Employee&gt;(command);</code></pre>
+    </section>
+
+    <section>
+      <h2>5. Why this structure helps</h2>
+      <div class="grid">
+        <article class="card"><h3>Testability</h3><p>Application tests can substitute <code>IEmployeeRepository</code> with a fake or mock. They do not need SQL Server running.</p></article>
+        <article class="card"><h3>Change tolerance</h3><p>The API contract and use cases can remain stable if the database provider or persistence implementation changes.</p></article>
+        <article class="card"><h3>Clear ownership</h3><p>Controllers handle HTTP, services handle use cases, repositories handle persistence, and the domain holds business meaning.</p></article>
+        <article class="card"><h3>Controlled coupling</h3><p>Only Infrastructure knows Dapper and SQL Server. Technology-specific dependencies stay at the boundary.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Rules to keep the architecture healthy</h2>
+      <div class="card">
+        <ul>
+          <li>Do not put SQL or Dapper calls in controllers or application services.</li>
+          <li>Do not make the Domain project reference ASP.NET Core, Dapper, or SQL client packages.</li>
+          <li>Define persistence interfaces in Application; implement them in Infrastructure.</li>
+          <li>Keep request and response DTOs at the API/Application boundary instead of exposing database models directly.</li>
+          <li>Keep stored procedure names and parameters explicit and consistent.</li>
+          <li>Validate both API input and database constraints. Validation at one boundary does not replace the other.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="run">
+      <h2>7. Run this project</h2>
+      <ol>
+        <li>Execute <code>database/001_CreateEmployees.sql</code>.</li>
+        <li>Execute <code>database/002_EmployeeProcedures.sql</code>.</li>
+        <li>Set <code>ConnectionStrings:DefaultConnection</code> in <code>src/EmployeeApi.Api/appsettings.json</code>.</li>
+        <li>Build with <code>dotnet build EmployeeApi.slnx</code>.</li>
+        <li>Start with <code>dotnet run --project src/EmployeeApi.Api</code>.</li>
+        <li>Use Swagger or an HTTP client to call <code>/api/employees</code>.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer><div class="shell">EmployeeApi Clean Architecture Guide · .NET 8 · Dapper · SQL Server stored procedures</div></footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\EmployeeApi.Application.csproj.AssemblyReference.cache
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\EmployeeApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\EmployeeApi.Application.AssemblyInfoInputs.cache
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\EmployeeApi.Application.AssemblyInfo.cs
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\EmployeeApi.Application.csproj.CoreCompileInputs.cache
+D:\cleanarchitecture\src\EmployeeApi.Application\bin\Debug\net8.0\EmployeeApi.Application.deps.json
+D:\cleanarchitecture\src\EmployeeApi.Application\bin\Debug\net8.0\EmployeeApi.Application.dll
+D:\cleanarchitecture\src\EmployeeApi.Application\bin\Debug\net8.0\EmployeeApi.Application.pdb
+D:\cleanarchitecture\src\EmployeeApi.Application\bin\Debug\net8.0\EmployeeApi.Domain.dll
+D:\cleanarchitecture\src\EmployeeApi.Application\bin\Debug\net8.0\EmployeeApi.Domain.pdb
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\Employee.400476AA.Up2Date
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\EmployeeApi.Application.dll
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\refint\EmployeeApi.Application.dll
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\EmployeeApi.Application.pdb
+D:\cleanarchitecture\src\EmployeeApi.Application\obj\Debug\net8.0\ref\EmployeeApi.Application.dll

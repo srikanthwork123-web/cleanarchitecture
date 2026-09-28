@@ -1,0 +1,17 @@
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\EmployeeApi.Infrastructure.csproj.AssemblyReference.cache
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\EmployeeApi.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\EmployeeApi.Infrastructure.AssemblyInfoInputs.cache
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\EmployeeApi.Infrastructure.AssemblyInfo.cs
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\EmployeeApi.Infrastructure.csproj.CoreCompileInputs.cache
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\bin\Debug\net8.0\EmployeeApi.Infrastructure.deps.json
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\bin\Debug\net8.0\EmployeeApi.Infrastructure.dll
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\bin\Debug\net8.0\EmployeeApi.Infrastructure.pdb
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\bin\Debug\net8.0\EmployeeApi.Application.dll
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\bin\Debug\net8.0\EmployeeApi.Domain.dll
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\bin\Debug\net8.0\EmployeeApi.Application.pdb
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\bin\Debug\net8.0\EmployeeApi.Domain.pdb
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\Employee.EF1C6C03.Up2Date
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\EmployeeApi.Infrastructure.dll
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\refint\EmployeeApi.Infrastructure.dll
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\EmployeeApi.Infrastructure.pdb
+D:\cleanarchitecture\src\EmployeeApi.Infrastructure\obj\Debug\net8.0\ref\EmployeeApi.Infrastructure.dll
